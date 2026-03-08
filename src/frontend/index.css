@@ -1,0 +1,541 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Romantic Design Tokens (OKLCH) ────────────────────────────────────────── */
+@layer base {
+  :root {
+    --radius: 1.5rem;
+
+    /* Semantic tokens — romantic pink palette */
+    --background: 0.97 0.015 350;        /* near-white warm pink */
+    --foreground: 0.22 0.06 340;         /* deep rose for body text */
+
+    --card: 1 0 0;                        /* pure white card */
+    --card-foreground: 0.22 0.06 340;
+
+    --popover: 1 0 0;
+    --popover-foreground: 0.22 0.06 340;
+
+    --primary: 0.55 0.22 0;              /* deep rose pink */
+    --primary-foreground: 1 0 0;          /* white text on primary */
+
+    --secondary: 0.92 0.06 355;          /* soft blush pink */
+    --secondary-foreground: 0.38 0.14 350;
+
+    --muted: 0.95 0.03 355;
+    --muted-foreground: 0.55 0.07 345;
+
+    --accent: 0.72 0.18 355;             /* vivid pink accent */
+    --accent-foreground: 1 0 0;
+
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+
+    --border: 0.88 0.06 355;
+    --input: 0.88 0.06 355;
+    --ring: 0.62 0.2 0;
+
+    /* Chart tokens */
+    --chart-1: 0.646 0.222 41.116;
+    --chart-2: 0.6 0.118 184.704;
+    --chart-3: 0.398 0.07 227.392;
+    --chart-4: 0.828 0.189 84.429;
+    --chart-5: 0.769 0.188 70.08;
+
+    /* Sidebar tokens */
+    --sidebar: 0.97 0.015 350;
+    --sidebar-foreground: 0.22 0.06 340;
+    --sidebar-primary: 0.55 0.22 0;
+    --sidebar-primary-foreground: 1 0 0;
+    --sidebar-accent: 0.92 0.06 355;
+    --sidebar-accent-foreground: 0.38 0.14 350;
+    --sidebar-border: 0.88 0.06 355;
+    --sidebar-ring: 0.62 0.2 0;
+
+    /* Custom romantic tokens */
+    --rose-deep: oklch(0.55 0.22 0);
+    --rose-vivid: oklch(0.62 0.26 0);
+    --rose-soft: oklch(0.92 0.06 355);
+    --rose-blush: oklch(0.97 0.015 350);
+    --rose-glow: oklch(0.72 0.18 355);
+    --gold-soft: oklch(0.85 0.12 85);
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Georgia", "Times New Roman", serif;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+}
+
+/* ── Background gradient ────────────────────────────────────────────────────── */
+.romantic-root {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    oklch(0.97 0.025 355) 0%,
+    oklch(0.94 0.04 350) 30%,
+    oklch(0.96 0.035 10) 60%,
+    oklch(0.98 0.015 330) 100%
+  );
+  animation: bg-shift 8s ease-in-out infinite alternate;
+}
+
+@keyframes bg-shift {
+  0% {
+    background: linear-gradient(
+      135deg,
+      oklch(0.97 0.025 355) 0%,
+      oklch(0.94 0.04 350) 30%,
+      oklch(0.96 0.035 10) 60%,
+      oklch(0.98 0.015 330) 100%
+    );
+  }
+  50% {
+    background: linear-gradient(
+      135deg,
+      oklch(0.95 0.04 345) 0%,
+      oklch(0.97 0.025 360) 30%,
+      oklch(0.93 0.05 355) 60%,
+      oklch(0.96 0.03 340) 100%
+    );
+  }
+  100% {
+    background: linear-gradient(
+      135deg,
+      oklch(0.98 0.015 5) 0%,
+      oklch(0.94 0.045 355) 30%,
+      oklch(0.96 0.02 345) 60%,
+      oklch(0.97 0.03 350) 100%
+    );
+  }
+}
+
+/* ── Floating hearts background ─────────────────────────────────────────────── */
+.hearts-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.bg-heart {
+  position: absolute;
+  bottom: -60px;
+  animation: float-up linear infinite;
+  opacity: 0.45;
+  user-select: none;
+  will-change: transform;
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.45;
+  }
+  80% {
+    opacity: 0.35;
+  }
+  100% {
+    transform: translateY(-110vh) rotate(25deg) scale(0.7);
+    opacity: 0;
+  }
+}
+
+/* ── Main layout ─────────────────────────────────────────────────────────────── */
+.romantic-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Romantic card ───────────────────────────────────────────────────────────── */
+.romantic-card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-radius: 2.5rem;
+  padding: 2.5rem 2rem;
+  max-width: 560px;
+  width: 100%;
+  box-shadow:
+    0 8px 40px oklch(0.62 0.18 355 / 0.18),
+    0 2px 8px oklch(0.55 0.22 0 / 0.10),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+  border: 1.5px solid oklch(0.88 0.06 355 / 0.5);
+  text-align: center;
+  position: relative;
+  overflow: visible;
+}
+
+/* ── Title ───────────────────────────────────────────────────────────────────── */
+.romantic-title {
+  font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Georgia", serif;
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 700;
+  color: var(--rose-deep);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 8px oklch(0.62 0.18 355 / 0.2);
+}
+
+/* ── Petal divider ────────────────────────────────────────────────────────────── */
+.petal-divider {
+  font-size: 1.3rem;
+  margin: 0.75rem auto 1.25rem;
+  letter-spacing: 0.4em;
+}
+
+/* ── Love paragraph ──────────────────────────────────────────────────────────── */
+.love-para {
+  font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Georgia", serif;
+  font-style: italic;
+  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+  line-height: 1.75;
+  color: oklch(0.45 0.1 340);
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.2rem;
+  background: oklch(0.97 0.025 355 / 0.7);
+  border-radius: 1.2rem;
+  border-left: 3px solid var(--rose-glow);
+  text-align: left;
+}
+
+.love-highlight {
+  font-weight: 600;
+  color: var(--rose-deep);
+  font-style: normal;
+}
+
+/* ── Question ────────────────────────────────────────────────────────────────── */
+.question-wrap {
+  background: linear-gradient(135deg, oklch(0.96 0.04 355) 0%, oklch(0.97 0.02 345) 100%);
+  border-radius: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.75rem;
+  border: 1px solid oklch(0.88 0.08 355 / 0.4);
+  box-shadow: 0 2px 12px oklch(0.62 0.18 355 / 0.08);
+}
+
+.question-text {
+  font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Georgia", serif;
+  font-size: clamp(1.1rem, 3vw, 1.35rem);
+  font-weight: 700;
+  color: oklch(0.32 0.1 340);
+  line-height: 1.45;
+  margin-bottom: 0.4rem;
+}
+
+.question-sub {
+  font-size: 1rem;
+  color: var(--rose-glow);
+  font-style: italic;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+/* ── Buttons row ─────────────────────────────────────────────────────────────── */
+.buttons-row {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+/* YES button */
+.btn-yes {
+  background: linear-gradient(135deg, var(--rose-deep) 0%, var(--rose-vivid) 100%);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.9rem 2rem;
+  font-size: 1.1rem;
+  font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Georgia", serif;
+  font-weight: 700;
+  cursor: pointer;
+  min-width: 160px;
+  min-height: 52px;
+  box-shadow:
+    0 4px 20px oklch(0.55 0.22 0 / 0.35),
+    0 0 0 0 oklch(0.62 0.26 0 / 0.4);
+  animation: pulse-glow 2s ease-in-out infinite;
+  transition: box-shadow 0.2s ease, transform 0.15s ease;
+  letter-spacing: 0.02em;
+  position: relative;
+  z-index: 1;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.btn-yes:focus-visible {
+  outline: 3px solid var(--rose-vivid);
+  outline-offset: 3px;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow:
+      0 4px 20px oklch(0.55 0.22 0 / 0.35),
+      0 0 0 0 oklch(0.62 0.26 0 / 0.4);
+  }
+  50% {
+    box-shadow:
+      0 6px 28px oklch(0.55 0.22 0 / 0.45),
+      0 0 0 8px oklch(0.62 0.26 0 / 0);
+  }
+}
+
+/* NO button */
+.btn-no {
+  background: transparent;
+  color: var(--rose-deep);
+  border: 2px solid var(--rose-deep);
+  border-radius: 999px;
+  padding: 0.9rem 1.75rem;
+  font-size: 1rem;
+  font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Georgia", serif;
+  cursor: pointer;
+  min-width: 155px;
+  min-height: 52px;
+  transition: opacity 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  letter-spacing: 0.01em;
+}
+
+.btn-no:focus-visible {
+  outline: 3px solid var(--rose-glow);
+  outline-offset: 3px;
+}
+
+/* Fixed runaway version */
+.btn-no-fixed {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  z-index: 9998;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px oklch(0.62 0.18 355 / 0.25);
+  font-size: 0.9rem;
+  padding: 0.7rem 1.4rem;
+  min-width: 130px;
+  min-height: 44px;
+  pointer-events: auto;
+}
+
+/* ── Hint text ────────────────────────────────────────────────────────────────── */
+.hint-text {
+  font-size: 0.88rem;
+  color: var(--rose-glow);
+  font-style: italic;
+  margin-top: 0.75rem;
+  animation: fade-bob 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes fade-bob {
+  from { opacity: 0.7; transform: translateY(0); }
+  to   { opacity: 1;   transform: translateY(-2px); }
+}
+
+/* ── Celebration overlay ─────────────────────────────────────────────────────── */
+.celebration-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: linear-gradient(
+    135deg,
+    oklch(0.92 0.06 355) 0%,
+    oklch(0.97 0.03 350) 50%,
+    oklch(0.93 0.05 345) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1rem 2rem;
+  overflow: hidden;
+}
+
+/* ── Confetti ─────────────────────────────────────────────────────────────────── */
+.confetti-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -40px;
+  animation: confetti-fall linear infinite;
+  user-select: none;
+  will-change: transform;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-40px) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(110vh) rotate(540deg) scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* ── Celebration card ─────────────────────────────────────────────────────────── */
+.celebration-card {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 2.5rem;
+  padding: 2rem 1.75rem;
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+  box-shadow:
+    0 12px 50px oklch(0.55 0.22 0 / 0.22),
+    inset 0 1px 0 rgba(255,255,255,1);
+  border: 1.5px solid oklch(0.88 0.08 355 / 0.6);
+}
+
+.celeb-title {
+  font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Georgia", serif;
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  font-weight: 700;
+  color: var(--rose-deep);
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 10px oklch(0.62 0.18 355 / 0.25);
+}
+
+.meme-img {
+  width: 100%;
+  max-width: 440px;
+  height: auto;
+  border-radius: 1.5rem;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 1.25rem;
+  box-shadow: 0 6px 24px oklch(0.55 0.22 0 / 0.18);
+}
+
+.celeb-msg {
+  font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Georgia", serif;
+  font-size: clamp(1.05rem, 2.8vw, 1.25rem);
+  font-weight: 600;
+  color: oklch(0.32 0.1 340);
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.celeb-sub {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--rose-glow);
+  font-style: italic;
+}
+
+.btn-replay {
+  background: linear-gradient(135deg, var(--rose-deep) 0%, var(--rose-vivid) 100%);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-family: "Palatino Linotype", "Palatino", "Book Antiqua", "Georgia", serif;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 48px;
+  box-shadow: 0 4px 18px oklch(0.55 0.22 0 / 0.3);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.btn-replay:focus-visible {
+  outline: 3px solid var(--rose-vivid);
+  outline-offset: 3px;
+}
+
+/* ── Footer ───────────────────────────────────────────────────────────────────── */
+.romantic-footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 1rem 1rem 1.5rem;
+  font-size: 0.8rem;
+  color: oklch(0.55 0.08 350);
+}
+
+.footer-link {
+  color: var(--rose-deep);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: var(--rose-vivid);
+  text-decoration: underline;
+}
+
+/* ── Reduced motion ───────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .bg-heart,
+  .confetti-piece,
+  .btn-yes {
+    animation: none;
+  }
+  .romantic-root {
+    animation: none;
+  }
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .romantic-card {
+    padding: 2rem 1.25rem;
+    border-radius: 2rem;
+  }
+
+  .buttons-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn-yes,
+  .btn-no {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .love-para {
+    font-size: 0.92rem;
+  }
+}
